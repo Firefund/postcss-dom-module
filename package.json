@@ -1,6 +1,6 @@
 {
   "name": "postcss-dom-module",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-beta",
   "description": "PostCSS plugin to turn CSS files into Polymer dom-modules",
   "main": "index.js",
   "scripts": {
@@ -23,12 +23,10 @@
   },
   "homepage": "https://github.com/Firefund/postcss-dom-module#readme",
   "dependencies": {
-    "handlebars": "^4.0.5",
     "postcss": "^5.0.21"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
-    "babel-plugin-transform-async-to-generator": "^6.8.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.10.3",
     "eol": "^0.2.0",
     "tap": "^5.7.3"
