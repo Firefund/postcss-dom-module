@@ -42,7 +42,7 @@ Promise.all(test1).then(files => {
 });
 
 function run(t, input, output, opts = {}) {
-    return (0, _postcss2.default)().process(input, { stringifier: _index2.default }).then(result => {
+    return (0, _postcss2.default)().process(input, { stringifier: (0, _index2.default)(opts) }).then(result => {
         t.deepEqual(_eol2.default.auto(result.content), _eol2.default.auto(output));
         t.deepEqual(result.warnings().length, 0);
     });

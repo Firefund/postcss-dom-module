@@ -14,17 +14,19 @@ class DomModule extends Stringifier {
             template = fs.readFileSync(`${__dirname}/template.html`, "utf8")
 
             webcomponentHeader = template.match(/^(.|\n)+<style>/)[0]
-            webcomponentFooter = template.match(/<\/style>(.|\n)+$/)[0]        
+            webcomponentFooter = template.match(/<\/style>(.|\n)+$/)[0]
         } catch(error) {
             console.error(error)
         }
         this.builder(webcomponentHeader.replace(/{{id}}/, options.id))
         super.root(node)
-        this.builder(webcomponentFooter)           
+        this.builder(webcomponentFooter)
     }
 }
 
-function stringify(node, builder) {    
-    const domModule = new DomModule(builder)
-    domModule.root(node, { id: "test1" })
+function stringify(options = {}) {
+    return (node, builder) => {
+        const domModule = new DomModule(builder)
+        domModule.root(node, options)
+    }
 }

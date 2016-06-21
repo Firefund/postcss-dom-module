@@ -22,7 +22,7 @@ Promise
     })
 
 function run(t, input, output, opts = { }) {
-    return postcss().process(input, { stringifier: domModule })
+    return postcss().process(input, { stringifier: domModule(opts) })
         .then( result => {
             t.deepEqual( eol.auto(result.content) , eol.auto(output))
             t.deepEqual(result.warnings().length, 0)
