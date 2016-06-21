@@ -4,7 +4,7 @@
   "description": "PostCSS plugin to turn CSS files into Polymer dom-modules",
   "main": "index.js",
   "scripts": {
-    "test": "tap tests/*.es5.js",
+    "test": "make -j && tap tests/*.es5.js",
     "babel": "babel"
   },
   "repository": {
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Firefund/postcss-dom-module#readme",
   "dependencies": {
+    "handlebars": "^4.0.5",
     "postcss": "^5.0.21"
   },
   "devDependencies": {

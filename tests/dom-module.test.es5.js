@@ -4,9 +4,9 @@ var _postcss = require("postcss");
 
 var _postcss2 = _interopRequireDefault(_postcss);
 
-var _indexEs = require("../index.es5.js");
+var _index = require("../index.es5");
 
-var _indexEs2 = _interopRequireDefault(_indexEs);
+var _index2 = _interopRequireDefault(_index);
 
 var _tap = require("tap");
 
@@ -16,17 +16,36 @@ var _fs = require("fs");
 
 var _fs2 = _interopRequireDefault(_fs);
 
+var _path = require("path");
+
+var _path2 = _interopRequireDefault(_path);
+
+var _readFile = require("../lib/readFile.es5");
+
+var _readFile2 = _interopRequireDefault(_readFile);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const expected = _fs2.default.readFileSync(`${ __dirname }/css/fixture.html`, "utf8");
-_fs2.default.readFile(`${ __dirname }/css/style.css`, "utf8", (err, data) => {
-    if (err) throw err;
-    run(_tap2.default, data, expected);
+const test1 = [`${ __dirname }/css/fixture.html`, `${ __dirname }/css/style.css`].map(_readFile2.default);
+
+Promise.all(test1).then(files => {
+    const expected = files[0];
+    const input = files[1];
+    run(_tap2.default, input, expected, { id: "test1" });
+}, err => {
+    throw err;
 });
 
 function run(t, input, output, opts = {}) {
-    return (0, _postcss2.default)([(0, _indexEs2.default)(opts)]).process(input).then(result => {
+    return (0, _postcss2.default)([(0, _index2.default)(opts)]).process(input).then(result => {
         t.deepEqual(result.css, output);
+        console.log(result.css)
         t.deepEqual(result.warnings().length, 0);
     });
 }
+
+// const expected = fs.readFileSync(`${__dirname}/css/fixture.html`, "utf8")
+// fs.readFile(`${__dirname}/css/style.css`, "utf8", (err, data) => {
+//     if (err) throw err;
+//     run(tap, data, expected)
+// })
