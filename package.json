@@ -2,8 +2,8 @@
   "name": "postcss-dom-module",
   "version": "1.0.0-beta",
   "description": "PostCSS plugin to turn CSS files into Polymer dom-modules",
-  "main": "index.js",
-  "bin": "bin/cli.js",
+  "main": "index.es5.js",
+  "bin": "bin/cli.es5.js",
   "scripts": {
     "test": "make -j && tap tests/*.es5.js",
     "babel": "babel"
