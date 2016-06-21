@@ -1,0 +1,30 @@
+{
+  "name": "postcss-dom-module",
+  "version": "1.0.0-alpha",
+  "description": "PostCSS plugin to turn CSS files into Polymer dom-modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Firefund/postcss-dom-module.git"
+  },
+  "keywords": [
+    "Polymer",
+    "external",
+    "CSS"
+  ],
+  "author": "dotnetCarpenter",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Firefund/postcss-dom-module/issues"
+  },
+  "homepage": "https://github.com/Firefund/postcss-dom-module#readme",
+  "dependencies": {
+    "postcss": "^5.0.21"
+  },
+  "devDependencies": {
+    "tap": "^5.7.3"
+  }
+}
