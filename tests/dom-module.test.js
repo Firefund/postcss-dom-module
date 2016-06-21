@@ -6,6 +6,7 @@ import tap from "tap"
 import fs from "fs"
 import path from "path"
 import readFile from "../lib/readFile.es5"
+import eol from "eol"
 
 const test1 = [`${__dirname}/css/fixture.html`, `${__dirname}/css/style.css`].map(readFile)
 
@@ -23,7 +24,7 @@ Promise
 function run(t, input, output, opts = { }) {
     return postcss().process(input, { stringifier: domModule })
         .then( result => {
-            t.deepEqual(result.content, output)
+            t.deepEqual( eol.auto(result.content) , eol.auto(output))
             t.deepEqual(result.warnings().length, 0)
         })
 }
