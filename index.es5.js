@@ -32,10 +32,11 @@ class DomModule extends _stringifier2.default {
 
             webcomponentHeader = template.match(/^(.|\n)+<style>/)[0];
             webcomponentFooter = template.match(/<\/style>(.|\n)+$/)[0];
+
+            this.builder(webcomponentHeader.replace(/{{id}}/, node.nodes[0].selector.replace(/\./, "")));
         } catch (error) {
             console.error(error);
         }
-        this.builder(webcomponentHeader.replace(/{{id}}/, options.id));
         super.root(node);
         this.builder(webcomponentFooter);
     }
