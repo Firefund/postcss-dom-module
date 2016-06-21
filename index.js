@@ -5,36 +5,46 @@ import Stringifier from "postcss/lib/stringifier"
 import * as handlebars from "handlebars"
 import readFile from "./lib/readFile.es5"
 
+export default stringify
 
 class DomModule extends Stringifier {
+
     constructor(builder) {
         super(builder)
-        this.fileReader = [`${__dirname}/template.header.html`, `${__dirname}/template.footer.html`].map(readFile)
+        this.fileReader = Promise.all([
+            `${__dirname}/template.header.html`,
+            `${__dirname}/template.footer.html`
+        ].map(readFile))
     }
-    root(node) {
+    root(node, options = {}) {
+        // const self = this
         return new Promise( (resolve, reject) => {
-
-            this.fileReader.all(content => {
-                let template = handlebars.compile(content[0])
+            this.fileReader.then( content => {
+                const template = handlebars.compile(content[0])
 
                 this.builder(template.compile(options))
                 super.root(node)
                 this.builder(content[1])
 
-                this.resolve()
-            }, err => { throw err })
-
-        , err => { reject(err) }
+                resolve()
+            }),
+            err => {
+                reject(err)
+            }
         })
     }
 }
-export default function stringify(node, builder) {
-    async function createDomModule() {
-        let domModule = new DomModule(builder)
-        await domModule.fileReader
-        domModule.root(node)
+async function stringify(node, builder) {
+    const domModule = new DomModule(builder)
+
+    try {
+        await domModule.root(node, { id: "test1" })
+        console.dir(domModule)
+    } catch (err) {
+        console.error(err)
     }
 }
+
 
 // export default postcss.plugin("dom-module", function domModule(options = {}) {
 
