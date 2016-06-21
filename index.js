@@ -7,17 +7,35 @@ import readFile from "./lib/readFile.es5"
 
 
 class DomModule extends Stringifier {
+    constructor(builder) {
+        super(builder)
+        this.fileReader = [`${__dirname}/template.header.html`, `${__dirname}/template.footer.html`].map(readFile)
+    }
     root(node) {
-        this.builder("<body>")
-        super.root(node)
-        this.builder("</body>")
+        return new Promise( (resolve, reject) => {
+
+            this.fileReader.all(content => {
+                let template = handlebars.compile(content[0])
+
+                this.builder(template.compile(options))
+                super.root(node)
+                this.builder(content[1])
+
+                this.resolve()
+            }, err => { throw err })
+
+        , err => { reject(err) }
+        })
     }
 }
 export default function stringify(node, builder) {
-    let domModule = new DomModule
-    domModule.builder = builder
-    domModule.root(node)
+    async function createDomModule() {
+        let domModule = new DomModule(builder)
+        await domModule.fileReader
+        domModule.root(node)
+    }
 }
+
 // export default postcss.plugin("dom-module", function domModule(options = {}) {
 
 //     let fileReader = [`${__dirname}/template.header.html`, `${__dirname}/template.footer.html`].map(readFile)
