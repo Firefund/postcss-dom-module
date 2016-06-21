@@ -4,7 +4,8 @@
   "description": "PostCSS plugin to turn CSS files into Polymer dom-modules",
   "main": "index.js",
   "scripts": {
-    "test": "tap test"
+    "test": "tap tests/*.es5.js",
+    "babel": "babel"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,8 @@
     "postcss": "^5.0.21"
   },
   "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.10.3",
     "tap": "^5.7.3"
   }
 }
