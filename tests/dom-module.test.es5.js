@@ -47,9 +47,3 @@ function run(t, input, output, opts = {}) {
         t.deepEqual(result.warnings().length, 0);
     });
 }
-
-// const expected = fs.readFileSync(`${__dirname}/css/fixture.html`, "utf8")
-// fs.readFile(`${__dirname}/css/style.css`, "utf8", (err, data) => {
-//     if (err) throw err;
-//     run(tap, data, expected)
-// })
