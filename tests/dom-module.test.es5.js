@@ -31,15 +31,15 @@ const test1 = [`${ __dirname }/css/fixture.html`, `${ __dirname }/css/style.css`
 Promise.all(test1).then(files => {
     const expected = files[0];
     const input = files[1];
+    _tap2.default.plan(2);
     run(_tap2.default, input, expected, { id: "test1" });
 }, err => {
     throw err;
 });
 
 function run(t, input, output, opts = {}) {
-    return (0, _postcss2.default)([(0, _index2.default)(opts)]).process(input).then(result => {
-        t.deepEqual(result.css, output);
-        console.log(result.css)
+    return (0, _postcss2.default)().process(input, { stringifier: _index2.default }).then(result => {
+        t.deepEqual(result.content, output);
         t.deepEqual(result.warnings().length, 0);
     });
 }

@@ -14,17 +14,18 @@ Promise
     .then( files => {
         const expected = files[0]
         const input = files[1]
+        tap.plan(2)
         run(tap, input, expected, { id: "test1" })
     }, err => {
         throw err
     })
 
 function run(t, input, output, opts = { }) {
-    return postcss([ domModule(opts) ]).process(input)
+    return postcss().process(input, { stringifier: domModule })
         .then( result => {
-            t.deepEqual(result.css, output);
-            t.deepEqual(result.warnings().length, 0);
-        });
+            t.deepEqual(result.content, output)
+            t.deepEqual(result.warnings().length, 0)
+        })
 }
 
 // const expected = fs.readFileSync(`${__dirname}/css/fixture.html`, "utf8")
