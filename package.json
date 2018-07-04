@@ -6,7 +6,8 @@
   "bin": "bin/cli.es5.js",
   "scripts": {
     "test": "make -j && tap tests/*.es5.js",
-    "babel": "babel"
+    "babel": "babel",
+    "prepublish": "make -j"
   },
   "repository": {
     "type": "git",

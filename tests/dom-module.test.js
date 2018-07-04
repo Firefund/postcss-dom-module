@@ -16,7 +16,7 @@ Promise
         const expected = files[0]
         const input = files[1]
         tap.plan(2)
-        run(tap, input, expected, { id: "test1" })
+        run(tap, input, expected/*, { id: "test1" } options are ignored */)
     }, err => {
         throw err
     })

@@ -29,9 +29,7 @@ class DomModule extends Stringifier {
     }
 }
 
-function stringify(options = {}) {
-    return (node, builder) => {
-        const domModule = new DomModule(builder)
-        domModule.root(node, options)
-    }
+function stringify(node, builder) {
+    const domModule = new DomModule(builder)
+    domModule.root(node, options)
 }

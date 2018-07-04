@@ -36,7 +36,7 @@ Promise.all(test1).then(files => {
     const expected = files[0];
     const input = files[1];
     _tap2.default.plan(2);
-    run(_tap2.default, input, expected, { id: "test1" });
+    run(_tap2.default, input, expected /*, { id: "test1" } options are ignored */);
 }, err => {
     throw err;
 });

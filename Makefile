@@ -16,3 +16,6 @@ $(DOM_MODULE_LIB): lib/readFile.js
 
 $(DOM_MODULE_BIN): bin/cli.js
 	npm run babel -- $< --out-file $@
+
+$(DOM_MODULE_BIN): bin/cli.js
+	npm run babel -- $< --out-file $@
